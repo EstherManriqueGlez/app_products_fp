@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Producto } from '../interfaces/products';
+import { Product } from '../interfaces/products';
 
 
 
@@ -8,7 +8,7 @@ import { Producto } from '../interfaces/products';
 })
 export class DataService {
 
-  PRODUCT_DATA: Producto[] = [
+  PRODUCT_DATA: Product[] = [
     {
        "id": "fabb7b91-0329-437f-9f04-9880b3f35047",
        "productName": "Mouse",

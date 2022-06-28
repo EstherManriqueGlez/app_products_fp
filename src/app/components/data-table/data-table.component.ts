@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Producto } from 'src/app/interfaces/products';
+import { Product } from 'src/app/interfaces/products';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class DataTableComponent implements OnInit {
 
-  listProducts: Producto[] = [];
+  listProducts: Product[] = [];
   displayedColumns: string[] = ['productName', 'price', 'isAvailable'];
   dataSource!: MatTableDataSource<any>
 
