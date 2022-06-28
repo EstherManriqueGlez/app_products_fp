@@ -10,7 +10,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -23,7 +22,6 @@ const material = [
   MatTableModule,
   MatTooltipModule,
   MatPaginatorModule,
-  MatSortModule,
   MatGridListModule,
   MatSelectModule
 ]

@@ -1,7 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Producto } from '../interfaces/products';
 
-// const PRODUCT_DATA: Producto[] = [
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+
+  PRODUCT_DATA: Producto[] = [
+    {id: 1, name: 'Hydrogen', price: 1.0079, availability: true},
+    {id: 2, name: 'Helium', price: 4.0026, availability: false},
+    {id: 3, name: 'Lithium', price: 6.941, availability: false},
+    {id: 4, name: 'Beryllium', price: 9.0122, availability: true},
+    {id: 5, name: 'Boron', price: 10.811, availability: true},
+    {id: 6, name: 'Carbon', price: 12.0107, availability: true},
+    {id: 7, name: 'Nitrogen', price: 14.0067, availability: true},
+    {id: 8, name: 'Oxygen', price: 15.9994, availability: true},
+    {id: 9, name: 'Fluorine', price: 18.9984, availability: true},
+    {id: 10, name: 'Neon', price: 20.1797, availability: true},
+  ];
+
+  // const PRODUCT_DATA: Producto[] = [
 //   {
 //      "id": "81aa7782-885c-4afe-8cee-4ec800f00591",
 //      "productName": "Car",
@@ -154,10 +174,9 @@ import { Producto } from '../interfaces/products';
 //   }
 // ]
 
-@Injectable({
-  providedIn: 'root'
-})
-export class DataService {
-
   constructor() { }
+
+  getProducts() {
+    return this.PRODUCT_DATA.slice();
+  }
 }
