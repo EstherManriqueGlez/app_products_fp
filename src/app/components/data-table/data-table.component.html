@@ -17,13 +17,13 @@
           The actual rendered columns are set as a property on the row definition" -->
   
     <!-- Position Column -->
-    <ng-container matColumnDef="id">
+    <!-- <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+    </ng-container> -->
   
     <!-- Name Column -->
-    <ng-container matColumnDef="name">
+    <ng-container matColumnDef="productName">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
     </ng-container>
@@ -35,7 +35,7 @@
     </ng-container>
   
     <!-- Symbol Column -->
-    <ng-container matColumnDef="availability">
+    <ng-container matColumnDef="isAvailable">
       <th mat-header-cell *matHeaderCellDef> Availability </th>
       <td mat-cell *matCellDef="let element"> {{element.isAvailable}} </td>
     </ng-container>

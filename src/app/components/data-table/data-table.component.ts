@@ -12,7 +12,7 @@ import { DataService } from 'src/app/services/data.service';
 export class DataTableComponent implements OnInit {
 
   listProducts: Producto[] = [];
-  displayedColumns: string[] = ['id', 'name', 'price', 'availability'];
+  displayedColumns: string[] = ['productName', 'price', 'isAvailable'];
   dataSource!: MatTableDataSource<any>
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
