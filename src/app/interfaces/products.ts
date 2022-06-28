@@ -1,6 +1,7 @@
+
 export interface Producto {
-  id: number;
-  name: string;
+  id: string;
+  productName: string;
   price: number;
-  availability: boolean;
+  isAvaliable: boolean;
 }

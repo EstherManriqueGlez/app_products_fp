@@ -1,20 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Producto } from 'src/app/interfaces/products';
-
-
-const PRODUCT_DATA: Producto[] = [
-  {id: 1, name: 'Hydrogen', price: 1.0079, availability: true},
-  {id: 2, name: 'Helium', price: 4.0026, availability: false},
-  {id: 3, name: 'Lithium', price: 6.941, availability: false},
-  {id: 4, name: 'Beryllium', price: 9.0122, availability: true},
-  {id: 5, name: 'Boron', price: 10.811, availability: true},
-  {id: 6, name: 'Carbon', price: 12.0107, availability: true},
-  {id: 7, name: 'Nitrogen', price: 14.0067, availability: true},
-  {id: 8, name: 'Oxygen', price: 15.9994, availability: true},
-  {id: 9, name: 'Fluorine', price: 18.9984, availability: true},
-  {id: 10, name: 'Neon', price: 20.1797, availability: true},
-];
-
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-data-table',
@@ -23,12 +11,30 @@ const PRODUCT_DATA: Producto[] = [
 })
 export class DataTableComponent implements OnInit {
 
+  listProducts: Producto[] = [];
   displayedColumns: string[] = ['id', 'name', 'price', 'availability'];
-  dataSource = PRODUCT_DATA;
+  dataSource!: MatTableDataSource<any>
 
-  constructor() { }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(private _dataService: DataService) { }
 
   ngOnInit(): void {
+    this.loadProducts()
+  }
+
+  loadProducts() {
+    this.listProducts = this._dataService.getProducts();
+    this.dataSource = new MatTableDataSource(this.listProducts)
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }
