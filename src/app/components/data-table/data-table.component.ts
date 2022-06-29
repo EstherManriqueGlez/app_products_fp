@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from 'src/app/interfaces/products';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -15,6 +14,7 @@ export class DataTableComponent implements OnInit {
   displayedColumns!: string[];
   dataSource!: MatTableDataSource<any>;
   startingPage: number = 0;
+  pageSize: number = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -25,15 +25,16 @@ export class DataTableComponent implements OnInit {
       this.displayedColumns = ['productName', 'price', 'isAvailable'];
       this.dataSource = new MatTableDataSource(response);
       this.dataSource.paginator = this.paginator; 
+      this.dataSource.paginator.pageSize = this.pageSize;
     });
     this.route.queryParams.subscribe((params) => {
       const page = params['page'];
+      const size = params['size'];
       if(page > 0) {
-        this.startingPage = page - 1
+        this.startingPage = page - 1;
+        this.pageSize = size;
       }
     })
-
-
   }
 
   applyFilter(inputName: string, event: Event) {
@@ -46,7 +47,8 @@ export class DataTableComponent implements OnInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
-        page: event.pageIndex + 1
+        page: event.pageIndex + 1,
+        size: event.pageSize
       },
       // queryParamsHandling: 'merge'
     })

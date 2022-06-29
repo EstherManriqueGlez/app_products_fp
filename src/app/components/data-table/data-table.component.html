@@ -2,67 +2,69 @@
   <mat-toolbar>
     <span>Products</span>
     <div class="example-spacer"></div>
-    <button mat-raised-button color="primary" routerLink="/dashboard/crear-usuario">Search</button>
+    <button mat-raised-button color="primary" routerLink="">Clear Filter</button>
   </mat-toolbar>
 
   <div class="product-filters">
     <div class="filter-by-name">
       <mat-form-field appearance="standard">
-        <mat-label>Filter</mat-label>
-        <input matInput name="filterName" (keyup)="applyFilter('name', $event)" placeholder="Ex. ium" #input autocomplete="off">
+        <mat-label>Filter by Name</mat-label>
+        <input matInput name="filterName" (keyup)="applyFilter('name', $event)" placeholder="Ex. chair" #input
+          autocomplete="off">
       </mat-form-field>
     </div>
     <div class="filter-by-price">
       <mat-form-field appearance="standard">
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter('price', $event)" placeholder="Ex. ium" #input autocomplete="off">
+        <mat-label>Filter by Price</mat-label>
+        <input matInput (keyup)="applyFilter('price', $event)" placeholder="Ex. 100" #input autocomplete="off">
       </mat-form-field>
     </div>
     <div class="filter-by-availability">
       <mat-form-field appearance="standard">
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter('availability', $event)" placeholder="Ex. ium" #input autocomplete="off">
+        <mat-label>Filter by Availability</mat-label>
+        <input matInput (keyup)="applyFilter('availability', $event)" placeholder="Ex. true " #input autocomplete="off">
       </mat-form-field>
     </div>
   </div>
 
   <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
+    <table mat-table [dataSource]="dataSource">
 
-    <!--- Note that these columns can be defined in any order.
+      <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
-  
-    <!-- Position Column -->
-    <!-- <ng-container matColumnDef="id">
+
+      <!-- Position Column -->
+      <!-- <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container> -->
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="productName">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
-    </ng-container>
-  
-    <!-- Weight Column -->
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Price </th>
-      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-    </ng-container>
-  
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="isAvailable">
-      <th mat-header-cell *matHeaderCellDef> Availability </th>
-      <td mat-cell *matCellDef="let element">
-        <mat-checkbox [disabled]="true" [checked]="element.isAvailable"></mat-checkbox>
-      </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons [pageIndex]="startingPage" (page)="pageChanged($event)" ></mat-paginator>
-</div>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="productName">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="isAvailable">
+        <th mat-header-cell *matHeaderCellDef> Availability </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox [disabled]="true" [checked]="element.isAvailable"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons [pageIndex]="startingPage" [pageSize]="pageSize"
+      (page)="pageChanged($event)"></mat-paginator>
+  </div>
 
 </div>
