@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Producto } from '../interfaces/products';
+import { Product } from '../interfaces/products';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 
 
 
@@ -8,162 +11,169 @@ import { Producto } from '../interfaces/products';
 })
 export class DataService {
 
-PRODUCT_DATA: Producto[] = [
-  {
-     "id": "81aa7782-885c-4afe-8cee-4ec800f00591",
-     "productName": "Car",
-     "price": 433,
-     "isAvaliable": false
-  },
-  {
-     "id": "da9cb3fc-9bf2-47ea-8c5b-7930ab21344e",
-     "productName": "Bacon",
-     "price": 216,
-     "isAvaliable": false
-  },
-  {
-     "id": "e76db9ed-b9cb-4754-9223-dfe855a402fe",
-     "productName": "Sleek Bronze Car",
-     "price": 251,
-     "isAvaliable": false
-  },
-  {
-     "id": "534c12ca-df95-47d3-93a0-5cf22ee24bd7",
-     "productName": "Gorgeous Concrete Ball",
-     "price": 398,
-     "isAvaliable": false
-  },
-  {
-     "id": "a57a0319-3aa9-42d9-8a18-34472a945d74",
-     "productName": "Shirt",
-     "price": 238,
-     "isAvaliable": true
-  },
-  {
-     "id": "9d3a50cb-b8e9-46f0-a2f4-9ebba0ce1f5d",
-     "productName": "Salad",
-     "price": 87,
-     "isAvaliable": false
-  },
-  {
-     "id": "377a0f0c-5d29-42bb-ad12-32ea684e8270",
-     "productName": "Modern Wooden Car",
-     "price": 74,
-     "isAvaliable": false
-  },
-  {
-     "id": "1cdbe881-8c15-43f3-971a-c85e7ed66acc",
-     "productName": "Fantastic Cotton Gloves",
-     "price": 70,
-     "isAvaliable": false
-  },
-  {
-     "id": "c1b67c09-ed67-4aff-be36-89d149b9aa41",
-     "productName": "Handcrafted Metal Tuna",
-     "price": 352,
-     "isAvaliable": true
-  },
-  {
-     "id": "f436fae8-2ed4-4c74-82b1-3d0de3f01730",
-     "productName": "Table",
-     "price": 249,
-     "isAvaliable": false
-  },
-  {
-     "id": "6ad88980-bbc5-4325-bf05-291f83cc1b44",
-     "productName": "Sleek Concrete Bike",
-     "price": 250,
-     "isAvaliable": false
-  },
-  {
-     "id": "e4eb839f-f124-4d52-9f41-91c5b8302c66",
-     "productName": "Generic Plastic Table",
-     "price": 435,
-     "isAvaliable": false
-  },
-  {
-     "id": "761a645a-1aa0-4580-bac9-f15430244977",
-     "productName": "Chicken",
-     "price": 398,
-     "isAvaliable": true
-  },
-  {
-     "id": "228e9422-9090-4130-a5b0-55dbc29c0149",
-     "productName": "Gorgeous Concrete Chicken",
-     "price": 209,
-     "isAvaliable": true
-  },
-  {
-     "id": "f73313c1-a75d-40ec-85f4-af71a8668138",
-     "productName": "Sausages",
-     "price": 162,
-     "isAvaliable": false
-  },
-  {
-     "id": "f5f12c8e-98e3-40c0-8701-d70dfd87ed13",
-     "productName": "Bike",
-     "price": 249,
-     "isAvaliable": false
-  },
-  {
-     "id": "a9c40963-a347-4eab-a6a9-f8c5dcb4b040",
-     "productName": "Cheese",
-     "price": 152,
-     "isAvaliable": true
-  },
-  {
-     "id": "d74ecbbf-f336-4983-b5bf-ccdbc828f46e",
-     "productName": "Keyboard",
-     "price": 66,
-     "isAvaliable": true
-  },
-  {
-     "id": "04ff7c89-0486-4deb-aa7a-341651e79607",
-     "productName": "Electronic Granite Bacon",
-     "price": 132,
-     "isAvaliable": true
-  },
-  {
-     "id": "e995b01d-de7b-4d94-a4b2-f2b77426ce37",
-     "productName": "Unbranded Wooden Chair",
-     "price": 257,
-     "isAvaliable": false
-  },
-  {
-     "id": "a9df09bb-46fa-400b-9ea7-5d2783439605",
-     "productName": "Oriental Soft Mouse",
-     "price": 141,
-     "isAvaliable": false
-  },
-  {
-     "id": "1446ee2f-84cf-43b5-811c-36838344f6f6",
-     "productName": "Licensed Steel Gloves",
-     "price": 490,
-     "isAvaliable": false
-  },
-  {
-     "id": "b7643548-9a26-437a-b703-858ee9e4646d",
-     "productName": "Chips",
-     "price": 176,
-     "isAvaliable": true
-  },
-  {
-     "id": "d691559d-7d7b-41aa-8c58-6e02bbdf0e2d",
-     "productName": "Pizza",
-     "price": 200,
-     "isAvaliable": true
-  },
-  {
-     "id": "ba46ed26-259e-4da3-a11f-e317cde3f9ed",
-     "productName": "Small Concrete Pants",
-     "price": 193,
-     "isAvaliable": true
-  }
-]
+   private url = 'https://my-json-server.typicode.com/fernandoAlonsoV/AngularProjectMockedData/products';
 
-  constructor() { }
 
-  getProducts() {
-    return this.PRODUCT_DATA.slice();
+
+//   PRODUCT_DATA: Product[] = [
+//     {
+//        "id": "fabb7b91-0329-437f-9f04-9880b3f35047",
+//        "productName": "Mouse",
+//        "price": 316,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "790843ed-6ad1-4f52-8612-5b8a687c4a5f",
+//        "productName": "Modern Fresh Sausages",
+//        "price": 102,
+//        "isAvailable": true
+//     },
+//     {
+//        "id": "82ec01a5-de78-4731-9eff-79564ef08049",
+//        "productName": "Cheese",
+//        "price": 439,
+//        "isAvailable": true
+//     },
+//     {
+//        "id": "48e9e8cf-384d-4598-af69-708f3415f005",
+//        "productName": "Bacon",
+//        "price": 258,
+//        "isAvailable": true
+//     },
+//     {
+//        "id": "5cc0671b-eeb0-4e2b-a1b5-ae0efa39a806",
+//        "productName": "Sausages",
+//        "price": 214,
+//        "isAvailable": true
+//     },
+//     {
+//        "id": "6226bc63-cdad-4af3-b7dd-20097dbf112c",
+//        "productName": "Incredible Plastic Pizza",
+//        "price": 428,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "910dc06f-f4ef-4913-8321-9ffa4aa04f01",
+//        "productName": "Handcrafted Rubber Car",
+//        "price": 148,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "190ff0a2-127a-425e-9ed7-6ecdb1d4eed1",
+//        "productName": "Car",
+//        "price": 163,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "1be5d6d0-366b-49c6-8543-b9e2f541f367",
+//        "productName": "Sleek Cotton Bike",
+//        "price": 416,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "6498ff48-3573-4ea7-9733-151f968c6eee",
+//        "productName": "Oriental Soft Soap",
+//        "price": 310,
+//        "isAvailable": true
+//     },
+//     {
+//        "id": "cca7a957-a06e-4d7b-9279-32db846e22f3",
+//        "productName": "Chicken",
+//        "price": 115,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "6033b5ba-e56e-4699-a0be-d2af09ca706d",
+//        "productName": "Hat",
+//        "price": 199,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "ec747557-0b29-4e18-9fa3-353e15918bb7",
+//        "productName": "Soap",
+//        "price": 296,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "06148fb1-a08b-4e14-954a-f140f75986bb",
+//        "productName": "Computer",
+//        "price": 95,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "1b2b1a59-9a6c-42ab-95ad-fa1d155cf91a",
+//        "productName": "Ergonomic Wooden Soap",
+//        "price": 371,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "74c96438-de16-458b-b217-b40770355d52",
+//        "productName": "Unbranded Granite Towels",
+//        "price": 347,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "693c6760-4c41-43ad-ba91-5af11a69ee1b",
+//        "productName": "Ball",
+//        "price": 467,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "85c6378c-ada6-4be0-893a-66992245eb7c",
+//        "productName": "Gloves",
+//        "price": 270,
+//        "isAvailable": true
+//     },
+//     {
+//        "id": "bc6dfd61-5fc0-415d-8c1d-0f2b4e224c35",
+//        "productName": "Ergonomic Steel Cheese",
+//        "price": 135,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "66e664ca-9057-4afc-98d3-fbf433dfc0da",
+//        "productName": "Chair",
+//        "price": 53,
+//        "isAvailable": true
+//     },
+//     {
+//        "id": "c0c7d3f5-2094-49fd-93fc-6f1b4ca65511",
+//        "productName": "Practical Frozen Cheese",
+//        "price": 202,
+//        "isAvailable": false
+//     },
+//     {
+//        "id": "abbd234c-03f0-4be6-8023-230296f613e1",
+//        "productName": "Ergonomic Soft Gloves",
+//        "price": 64,
+//        "isAvailable": true
+//     },
+//     {
+//        "id": "62e50b1f-9a3b-486f-b2d8-e7e60834b74f",
+//        "productName": "Luxurious Granite Soap",
+//        "price": 48,
+//        "isAvailable": true
+//     },
+//     {
+//        "id": "68def074-10ed-4094-a068-eaa04442f393",
+//        "productName": "Recycled Granite Shirt",
+//        "price": 210,
+//        "isAvailable": true
+//     },
+//     {
+//        "id": "52ee4ea0-512b-437d-a866-1a302bbfdc87",
+//        "productName": "Table",
+//        "price": 387,
+//        "isAvailable": false
+//     }
+//  ]
+
+
+
+  constructor(private httpClient: HttpClient) { }
+
+  getProducts(): Observable<Product[]> {
+   return this.httpClient.get<Product[]>(this.url);
+   
   }
 }

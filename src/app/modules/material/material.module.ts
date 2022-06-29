@@ -14,6 +14,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const material = [
   MatToolbarModule,
@@ -27,7 +28,8 @@ const material = [
   MatGridListModule,
   MatSelectModule,
   MatInputModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatCheckboxModule
 ]
 
 @NgModule({

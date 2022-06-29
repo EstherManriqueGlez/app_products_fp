@@ -6,12 +6,17 @@
     margin-top: 1rem;
 
     th {
-      width: 30%;
+      width: 45%;
     }
   }
 
   .mat-form-field {
     font-size: 14px;
-    width: 100%;
+    // width: 100%;
+  }
+
+  .product-filters {
+    display: flex;
+    justify-content: space-between;
   }
 }
