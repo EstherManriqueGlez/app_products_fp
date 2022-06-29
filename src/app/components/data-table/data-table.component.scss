@@ -12,6 +12,11 @@
 
   .mat-form-field {
     font-size: 14px;
-    width: 100%;
+    // width: 100%;
+  }
+
+  .product-filters {
+    display: flex;
+    justify-content: space-between;
   }
 }
