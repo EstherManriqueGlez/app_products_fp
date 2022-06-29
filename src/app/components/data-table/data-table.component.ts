@@ -12,7 +12,6 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class DataTableComponent implements OnInit {
 
-  listProducts!: Product[];
   displayedColumns!: string[];
   dataSource!: MatTableDataSource<any>;
   startingPage: number = 0;
@@ -23,9 +22,8 @@ export class DataTableComponent implements OnInit {
 
   ngOnInit(): void {
     this._dataService.getProducts().subscribe((response) => {
-      this.listProducts = response;
       this.displayedColumns = ['productName', 'price', 'isAvailable'];
-      this.dataSource = new MatTableDataSource(this.listProducts);
+      this.dataSource = new MatTableDataSource(response);
       this.dataSource.paginator = this.paginator; 
     });
     this.route.queryParams.subscribe((params) => {
@@ -34,9 +32,12 @@ export class DataTableComponent implements OnInit {
         this.startingPage = page - 1
       }
     })
+
+
   }
 
-  applyFilter(event: Event) {
+  applyFilter(inputName: string, event: Event) {
+    console.log(inputName);
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
@@ -50,4 +51,5 @@ export class DataTableComponent implements OnInit {
       // queryParamsHandling: 'merge'
     })
   }
+
 }

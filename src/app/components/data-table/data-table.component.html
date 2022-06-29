@@ -9,19 +9,19 @@
     <div class="filter-by-name">
       <mat-form-field appearance="standard">
         <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input autocomplete="off">
+        <input matInput name="filterName" (keyup)="applyFilter('name', $event)" placeholder="Ex. ium" #input autocomplete="off">
       </mat-form-field>
     </div>
     <div class="filter-by-price">
       <mat-form-field appearance="standard">
         <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input autocomplete="off">
+        <input matInput (keyup)="applyFilter('price', $event)" placeholder="Ex. ium" #input autocomplete="off">
       </mat-form-field>
     </div>
     <div class="filter-by-availability">
       <mat-form-field appearance="standard">
         <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input autocomplete="off">
+        <input matInput (keyup)="applyFilter('availability', $event)" placeholder="Ex. ium" #input autocomplete="off">
       </mat-form-field>
     </div>
   </div>
