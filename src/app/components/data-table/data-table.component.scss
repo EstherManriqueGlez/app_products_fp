@@ -19,4 +19,16 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .budget-range {
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+
+  }
+   
+  .budget-range mat-form-field {
+    width: 50%;
+  }
 }

@@ -15,22 +15,25 @@ export class DataTableComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   startingPage: number = 0;
   pageSize: number = 0;
+  budgetPanelOpenState: boolean = false;
+  minAmount!: number;
+  maxAmount!: number;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _dataService: DataService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private _dataService: DataService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this._dataService.getProducts().subscribe((response) => {
       this.displayedColumns = ['productName', 'price', 'isAvailable'];
       this.dataSource = new MatTableDataSource(response);
-      this.dataSource.paginator = this.paginator; 
+      this.dataSource.paginator = this.paginator;
       this.dataSource.paginator.pageSize = this.pageSize;
     });
     this.route.queryParams.subscribe((params) => {
       const page = params['page'];
       const size = params['size'];
-      if(page > 0) {
+      if (page > 0) {
         this.startingPage = page - 1;
         this.pageSize = size;
       }
@@ -51,7 +54,13 @@ export class DataTableComponent implements OnInit {
         size: event.pageSize
       },
       // queryParamsHandling: 'merge'
-    })
+    });
+  }
+
+  resetFilters() {
+    console.log('Reset filters');
+    
+    this.dataSource.filter = '';
   }
 
 }
