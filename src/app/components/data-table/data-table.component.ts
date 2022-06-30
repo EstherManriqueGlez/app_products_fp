@@ -14,7 +14,7 @@ export class DataTableComponent implements OnInit {
   displayedColumns!: string[];
   dataSource!: MatTableDataSource<any>;
   startingPage: number = 0;
-  pageSize: number = 0;
+
   budgetPanelOpenState: boolean = false;
   minAmount!: number;
   maxAmount!: number;
@@ -28,14 +28,14 @@ export class DataTableComponent implements OnInit {
       this.displayedColumns = ['productName', 'price', 'isAvailable'];
       this.dataSource = new MatTableDataSource(response);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.paginator.pageSize = this.pageSize;
+
     });
     this.route.queryParams.subscribe((params) => {
       const page = params['page'];
-      const size = params['size'];
+
       if (page > 0) {
         this.startingPage = page - 1;
-        this.pageSize = size;
+
       }
     })
   }
