@@ -39,15 +39,15 @@
         </div>
       </div>
       <div class="filter-by-availability">
-        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="radio-buttons"
           [(ngModel)]="searchAvailability" (change)="availabilityChange($event)">
-          <mat-radio-button class="example-radio-button" [checked]="searchAvailability === 'true'" value="true">
-            Only availables
+          <mat-radio-button class="availables" [checked]="searchAvailability === 'true'" value="true">
+            Availables
           </mat-radio-button>
-          <mat-radio-button class="example-radio-button" [checked]="searchAvailability === 'false'" value="false">
-            Only un-availables
+          <mat-radio-button class="unavailables" [checked]="searchAvailability === 'false'" value="false">
+            Unavailables
           </mat-radio-button>
-          <mat-radio-button class="example-radio-button" [checked]="searchAvailability === 'both'" value="both">
+          <mat-radio-button class="both" [checked]="searchAvailability === 'both'" value="both">
             Both
           </mat-radio-button>
         </mat-radio-group>
