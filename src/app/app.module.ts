@@ -6,18 +6,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MaterialModule } from './modules/material/material.module';
-import { DataTableComponent } from './components/data-table/data-table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DataTableFilterComponent } from './components/data-table-filter/data-table-filter.component';
 import { DataTableFilterBeComponent } from './components/data-table-filter-be/data-table-filter-be.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    DataTableComponent,
-    DataTableFilterComponent,
     DataTableFilterBeComponent
   ],
   imports: [

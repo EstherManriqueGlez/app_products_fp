@@ -3,6 +3,7 @@
     <span>Products</span>
     <div class="example-spacer"></div>
     <button mat-raised-button color="primary" (click)="search()">Search</button>
+    <div class="example-spacer"></div>
     <button mat-raised-button color="primary" (click)="clearFilter()">Clear Filter</button>
   </mat-toolbar>
 
@@ -38,12 +39,6 @@
         </div>
       </div>
       <div class="filter-by-availability">
-        <!-- <mat-form-field appearance="standard">
-          <mat-label>Filter by Availability</mat-label>
-          <input matInput name="filterName" [formControl]="availabilityFilter" placeholder="Ex. true " #input
-            autocomplete="off" />
-        </mat-form-field> -->
-
         <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
           [(ngModel)]="searchAvailability" (change)="availabilityChange($event)">
           <mat-radio-button class="example-radio-button" [checked]="searchAvailability === 'true'" value="true">

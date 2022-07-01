@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
@@ -33,7 +33,7 @@ export class DataTableFilterBeComponent implements OnInit {
   nameFilter = new FormControl('');
   minPriceFilter = new FormControl('');
   maxPriceFilter = new FormControl('');
-  // availabilityFilter = new FormControl('');
+  availabilityFilter = new FormControl('');
 
   constructor(private _dataService: DataService, private router: Router, private route: ActivatedRoute) { }
 
@@ -51,7 +51,6 @@ export class DataTableFilterBeComponent implements OnInit {
       }
 
       this.nameFilter.setValue(this.searchName || '');
-      // this.availabilityFilter.setValue(this.searchAvailability || '');
       this.minPriceFilter.setValue(this.searchMinPrice || '');
       this.maxPriceFilter.setValue(this.searchMaxPrice || '');
 
@@ -93,12 +92,12 @@ export class DataTableFilterBeComponent implements OnInit {
         }
       )
       
-    /*this.availabilityFilter.valueChanges
+    this.availabilityFilter.valueChanges
       .subscribe(
         isAvailable => {
           this.searchAvailability = isAvailable || '';
         }
-      )*/
+      )
     this.minPriceFilter.valueChanges
       .subscribe(
         minPrice => {
