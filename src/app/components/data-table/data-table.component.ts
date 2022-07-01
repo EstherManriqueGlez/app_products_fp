@@ -24,7 +24,7 @@ export class DataTableComponent implements OnInit {
   constructor(private _dataService: DataService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this._dataService.getProducts().subscribe((response) => {
+    this._dataService.getProducts('','','','').subscribe((response) => {
       this.displayedColumns = ['productName', 'price', 'isAvailable'];
       this.dataSource = new MatTableDataSource(response);
       this.dataSource.paginator = this.paginator;

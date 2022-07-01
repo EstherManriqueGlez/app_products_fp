@@ -36,15 +36,13 @@ export class DataTableFilterComponent implements OnInit {
   constructor(private _dataService: DataService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log('ngOnInit');
-    this._dataService.getProducts().subscribe((response) => {
+    this._dataService.getProducts('','','','').subscribe((response) => {
       this.dataSource = new MatTableDataSource(response);
       this.dataSource.paginator = this.paginator;
       this.dataSource.paginator.pageSize = this.pageSize;
       this.dataSource.filterPredicate = this.createFilter();
-      this.dataLoading = false;
       this.dataSource.filter = this.filterValues;
-      console.log('ngOnInit: service response');
+      this.dataLoading = false;
     });
     this.route.queryParams.subscribe((params) => {
       const page = params['page'];
@@ -63,12 +61,7 @@ export class DataTableFilterComponent implements OnInit {
       this.minPriceFilter.setValue(minPriceFilter || '');
       this.maxPriceFilter.setValue(maxPriceFilter || '');
     })
-
     this.fieldListener();
-  }
-
-  ngAfterViewInit(): void {
-    console.log('ngAfterViewInit');
   }
 
   pageChanged(event: PageEvent) {
@@ -88,13 +81,9 @@ export class DataTableFilterComponent implements OnInit {
         productName => {     
           this.filterValues.productName = productName;
           this.dataSource.filter = this.filterValues;
-          this.router.navigate([], {
-            relativeTo: this.route,
-            queryParams: {
-              name: productName
-            },
-            queryParamsHandling: 'merge'
-          });
+          this.updateQueryParams({
+            name: productName
+          })
         }
       )
       
@@ -103,13 +92,9 @@ export class DataTableFilterComponent implements OnInit {
         isAvailable => {
           this.filterValues.isAvailable = isAvailable;
           this.dataSource.filter = this.filterValues;
-          // this.router.navigate([], {
-          //   relativeTo: this.route,
-          //   queryParams: {
-          //     name: isAvailable
-          //   },
-          //   queryParamsHandling: 'merge'
-          // });
+          this.updateQueryParams({
+            isAvailable: isAvailable
+          })
         }
       )
     this.minPriceFilter.valueChanges
@@ -117,13 +102,9 @@ export class DataTableFilterComponent implements OnInit {
         minPrice => {
           this.filterValues.minPrice = minPrice;
           this.dataSource.filter = this.filterValues;
-          // this.router.navigate([], {
-          //   relativeTo: this.route,
-          //   queryParams: {
-          //     name: minPrice
-          //   },
-          //   queryParamsHandling: 'merge'
-          // });
+          this.updateQueryParams({
+            minPrice: minPrice
+          })
         }
       )
     this.maxPriceFilter.valueChanges
@@ -131,15 +112,19 @@ export class DataTableFilterComponent implements OnInit {
         maxPrice => {
           this.filterValues.maxPrice = maxPrice;
           this.dataSource.filter = this.filterValues;
-          // this.router.navigate([], {
-          //   relativeTo: this.route,
-          //   queryParams: {
-          //     name: maxPrice
-          //   },
-          //   queryParamsHandling: 'merge'
-          // });
+          this.updateQueryParams({
+            maxPrice: maxPrice
+          })
         }
       )
+  }
+
+  updateQueryParams(queryParams: Object) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: queryParams,
+      queryParamsHandling: 'merge'
+    });
   }
 
   clearFilter() {
