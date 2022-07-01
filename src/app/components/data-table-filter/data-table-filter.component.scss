@@ -1,5 +1,5 @@
 .container {
-  width: 80%;
+  width: 90%;
 
   table {
     width: 100%;
@@ -18,5 +18,17 @@
   .product-filters {
     display: flex;
     justify-content: space-between;
+
+    .filter-by-price {
+      text-align: center;
+
+      .filter-by-range {
+        mat-form-field {
+          width: 30%;
+          height: 3.5rem;
+          margin-right: 1rem;
+        }
+      }
+    }
   }
 }

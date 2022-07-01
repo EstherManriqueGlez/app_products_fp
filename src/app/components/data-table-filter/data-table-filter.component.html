@@ -20,7 +20,8 @@
       </div>
   
       <div class="filter-by-price">
-        <div class="budget-range">
+        <mat-label>Filter by Range</mat-label>
+        <div class="filter-by-range">
           <mat-form-field appearance="outline">
             <mat-label>Minimum</mat-label>
             <input type="number" matInput placeholder="100" [formControl]="minPriceFilter" />
@@ -39,7 +40,7 @@
       <div class="filter-by-availability">
         <mat-form-field appearance="standard">
           <mat-label>Filter by Availability</mat-label>
-          <input matInput [formControl]="availabilityFilter" placeholder="Ex. true " #input
+          <input matInput name="filterName" [formControl]="availabilityFilter" placeholder="Ex. true " #input
             autocomplete="off" />
         </mat-form-field>
       </div>
@@ -50,17 +51,17 @@
       <table mat-table [dataSource]="dataSource">
         <!-- Name Column -->
         <ng-container matColumnDef="productName">
-          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <th mat-header-cell *matHeaderCellDef>Product Name </th>
           <td mat-cell *matCellDef="let element">{{ element.productName }}</td>
         </ng-container>
   
-        <!-- Weight Column -->
+        <!-- Price Column -->
         <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef>Price</th>
-          <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+          <th mat-header-cell *matHeaderCellDef>Product Price</th>
+          <td mat-cell *matCellDef="let element">${{ element.price }}</td>
         </ng-container>
   
-        <!-- Symbol Column -->
+        <!-- Availability Column -->
         <ng-container matColumnDef="isAvailable">
           <th mat-header-cell *matHeaderCellDef>Availability</th>
           <td mat-cell *matCellDef="let element">
