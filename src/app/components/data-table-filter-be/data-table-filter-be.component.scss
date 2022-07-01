@@ -1,6 +1,10 @@
 .container {
   width: 90%;
 
+  .absolute-center mat-spinner {
+    margin: 0 auto;
+  }
+
   table {
     width: 100%;
     margin-top: 1rem;
@@ -36,7 +40,6 @@
         }
       }
     }
-
 
     .filter-by-price {
       text-align: center;
