@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { FormControl } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Product } from 'src/app/interfaces/products';
 import { MatRadioChange } from '@angular/material/radio';
+import { QueryParamsService } from 'src/app/services/query-params.service';
 
 @Component({
   selector: 'app-data-table-filter-be',
@@ -22,41 +22,48 @@ export class DataTableFilterBeComponent implements OnInit {
 
   pageIndex: number = 1;
   pageSize: number | null = null;
-  searchName: string = '';
-  searchAvailability: string = 'both';
-  searchMinPrice: string = '';
-  searchMaxPrice: string = '';
   dataLoading: boolean = true;
+
+  searchName: string = ''
+  searchAvailability: string = ''
+  searchMinPrice: string = ''
+  searchMaxPrice: string =  ''
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  nameFilter = new FormControl('');
-  minPriceFilter = new FormControl('');
-  maxPriceFilter = new FormControl('');
-  availabilityFilter = new FormControl('');
-
-  constructor(private _dataService: DataService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private _dataService: DataService, private _queryParams: QueryParamsService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    this._queryParams.currentSearchNameParam.subscribe((name) => {
+      this.searchName = name;
+    })
+    this._queryParams.currentSearchMinPriceParam.subscribe((minPrice) => {
+      this.searchMinPrice = minPrice;
+    })
+    this._queryParams.currentSearchMaxPriceParam.subscribe((maxPrice) => {
+      this.searchMaxPrice = maxPrice;
+    })
+    this._queryParams.currentSearchAvailabilityParam.subscribe((availability) => {
+      this.searchAvailability = availability;
+    })
+    
     this.route.queryParams.subscribe((params) => {
       const page = params['page'];
       const size = params['size'];
-      this.searchName = params['name'] || '';
-      this.searchMinPrice = params['minPrice'] || '';
-      this.searchMaxPrice = params['maxPrice'] || '';
-      this.searchAvailability = params['isAvailable'] || 'both';
+
+      this._queryParams.setSearchAvailabilityParam(params['isAvailable'] || 'both');
+      this._queryParams.setSearchNameParam(params['name'] || '');
+      this._queryParams.setSearchMinPriceParam(params['minPrice'] || '');
+      this._queryParams.setSearchMaxPriceParam(params['maxPrice'] || '');
+
       if (page > 0) {
         this.startingPage = page - 1; 
         this.pageSize = size;
       }
-
-      this.nameFilter.setValue(this.searchName || '');
-      this.minPriceFilter.setValue(this.searchMinPrice || '');
-      this.maxPriceFilter.setValue(this.searchMaxPrice || '');
-
       this.refreshTableData();
     })
-    this.fieldListener();
+
   }
 
   pageChanged(event: PageEvent) {
@@ -71,6 +78,7 @@ export class DataTableFilterBeComponent implements OnInit {
   }
 
   refreshTableData() {
+    this.dataLoading = true;
     this._dataService.getProducts(
       this.searchName,
       this.searchAvailability,
@@ -84,38 +92,6 @@ export class DataTableFilterBeComponent implements OnInit {
     });
   }
 
-  private fieldListener() {
-    this.nameFilter.valueChanges
-      .subscribe(
-        productName => {     
-          this.searchName = productName || '';
-        }
-      )
-      
-    this.availabilityFilter.valueChanges
-      .subscribe(
-        isAvailable => {
-          this.searchAvailability = isAvailable || '';
-        }
-      )
-    this.minPriceFilter.valueChanges
-      .subscribe(
-        minPrice => {
-          this.searchMinPrice = minPrice || '';
-        }
-      )
-    this.maxPriceFilter.valueChanges
-      .subscribe(
-        maxPrice => {
-          this.searchMaxPrice = maxPrice || '';
-        }
-      )
-  }
-
-  availabilityChange(event: MatRadioChange) {
-    this.searchAvailability = event.value;
-  }
-
   updateQueryParams(queryParams: Object) {
     this.router.navigate([], {
       relativeTo: this.route,
@@ -124,30 +100,4 @@ export class DataTableFilterBeComponent implements OnInit {
     });
   }
 
-  clearFilter() {
-    this.nameFilter.setValue('');
-    this.minPriceFilter.setValue('');
-    this.maxPriceFilter.setValue('');
-    this.searchName = '';
-    this.searchMinPrice = '';
-    this.searchMaxPrice = '';
-    this.searchAvailability = 'both';
-    this.refreshTableData();
-    this.updateQueryParams({
-      name: null,
-      isAvailable: null,
-      minPrice: null,
-      maxPrice: null
-    });
-  }
-
-  search() {
-    this.refreshTableData();
-    this.updateQueryParams({
-      name: this.searchName || '',
-      isAvailable: this.searchAvailability || 'both',
-      minPrice: this.searchMinPrice || '',
-      maxPrice: this.searchMaxPrice || ''
-    })
-  }
 }

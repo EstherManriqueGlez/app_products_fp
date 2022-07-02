@@ -9,12 +9,16 @@ import { MaterialModule } from './modules/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTableFilterBeComponent } from './components/data-table-filter-be/data-table-filter-be.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FiltersComponent } from './components/filters/filters.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    DataTableFilterBeComponent
+    DataTableFilterBeComponent,
+    HeaderComponent,
+    FiltersComponent
   ],
   imports: [
     BrowserModule,

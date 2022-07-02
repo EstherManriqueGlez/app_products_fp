@@ -1,61 +1,17 @@
 <div class="container">
-  <mat-toolbar>
-    <span>Products</span>
-    <div class="example-spacer"></div>
-    <button mat-raised-button color="primary" (click)="search()">Search</button>
-    <div class="example-spacer"></div>
-    <button mat-raised-button color="primary" (click)="clearFilter()">Clear Filter</button>
-  </mat-toolbar>
-
   <div class="absolute-center" *ngIf="dataLoading">
     <mat-spinner [diameter]="80"></mat-spinner>
   </div>
   <div [style.visibility]="dataLoading ? 'hidden' : 'visible'">
 
-    <div class="product-filters">
-      <div class="filter-by-name">
-        <mat-form-field appearance="outline">
-          <mat-label>Filter by name</mat-label>
-          <input matInput name="filterName" [formControl]="nameFilter" placeholder="Ex. chair" #input
-            autocomplete="off" />
-        </mat-form-field>
-      </div>
-
-      <div class="filter-by-price">
-        <div class="filter-by-range">
-          <mat-form-field appearance="outline">
-            <mat-label>Minimum price</mat-label>
-            <input type="number" matInput placeholder="100" [formControl]="minPriceFilter" />
-            <mat-icon matPrefix>
-              <span class="material-icons-outlined">attach_money</span></mat-icon>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Maximum price</mat-label>
-            <input type="number" matInput placeholder="100" [formControl]="maxPriceFilter" />
-            <mat-icon matPrefix>
-              <span class="material-icons-outlined">attach_money</span></mat-icon>
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="filter-by-availability">
-        <mat-radio-group aria-labelledby="example-radio-group-label" class="radio-buttons"
-          [(ngModel)]="searchAvailability" (change)="availabilityChange($event)">
-          <mat-radio-button class="availables" [checked]="searchAvailability === 'true'" value="true">
-            Availables
-          </mat-radio-button>
-          <mat-radio-button class="unavailables" [checked]="searchAvailability === 'false'" value="false">
-            Unavailables
-          </mat-radio-button>
-          <mat-radio-button class="both" [checked]="searchAvailability === 'both'" value="both">
-            Both
-          </mat-radio-button>
-        </mat-radio-group>
-      </div>
-    </div>
-
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource">
+
+        <tr class="mat-row" *matNoDataRow="">
+          <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+            No data matching the filter
+          </td>
+        </tr>
         <!-- Name Column -->
         <ng-container matColumnDef="productName">
           <th mat-header-cell *matHeaderCellDef>Product Name </th>
