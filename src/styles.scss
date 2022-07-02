@@ -9,6 +9,8 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   
   .container {
+    width: 96%;
+    max-width: 1440px;
     margin: 0 auto;
     
     .example-spacer {

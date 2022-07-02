@@ -1,5 +1,4 @@
 .container {
-  width: 90%;
 
   .absolute-center mat-spinner {
     margin: 0 auto;
@@ -18,36 +17,5 @@
     font-size: 14px;
   }
 
-  .product-filters {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
 
-    > div {
-      display: flex;
-      height: 100%;
-      justify-content: flex-end;
-      flex-direction: column;
-      align-items: center;
-
-      &.filter-by-availability {
-        mat-radio-group {
-          display: flex;
-          flex-direction: column;
-          mat-radio-button {
-            margin-bottom: 5px;
-          }
-        }
-      }
-    }
-
-    .filter-by-price {
-      text-align: center;
-      .filter-by-range {
-        mat-form-field {
-          margin-right: 1rem;
-        }
-      }
-    }
-  }
 }
