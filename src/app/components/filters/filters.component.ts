@@ -11,16 +11,16 @@ import { QueryParamsService } from 'src/app/services/query-params.service';
 })
 export class FiltersComponent implements OnInit {
 
-  searchName: string = ''
-  searchAvailability: string = ''
-  searchMinPrice: string = ''
-  searchMaxPrice: string =  ''
+  searchName: string = '';
+  searchAvailability: string = '';
+  searchMinPrice: string = '';
+  searchMaxPrice: string = '';
 
   nameFilter = new FormControl('');
   minPriceFilter = new FormControl('');
   maxPriceFilter = new FormControl('');
 
-  constructor(private _queryParams: QueryParamsService,  private route: ActivatedRoute) { }
+  constructor(private _queryParams: QueryParamsService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this._queryParams.currentSearchNameParam.subscribe((name) => {
@@ -37,17 +37,16 @@ export class FiltersComponent implements OnInit {
     })
 
     this.fieldListener();
-
   }
 
-  availabilityChange(event: MatRadioChange) {
+  availabilityChange(event: MatRadioChange): void {
     this._queryParams.setSearchAvailabilityParam(event.value || '');
   }
 
-  private fieldListener() {
+  private fieldListener(): void {
     this.nameFilter.valueChanges
       .subscribe(
-        productName => {     
+        productName => {
           this._queryParams.setSearchNameParam(productName || '')
         }
       )
@@ -64,5 +63,4 @@ export class FiltersComponent implements OnInit {
         }
       )
   }
-
 }

@@ -21,16 +21,16 @@ export class DataService {
     
     let url = `${this.base_url}?`;
     if(name) {
-      url += `&productName_like=${name}`
+      url += `&productName_like=${name}`;
     }
     if(minPrice) {
-      url += `&price_gte=${minPrice}`
+      url += `&price_gte=${minPrice}`;
     }
     if(maxPrice) {
-      url += `&price_lte=${maxPrice}`
+      url += `&price_lte=${maxPrice}`;
     }
     if(availability && (availability === 'true' || availability === 'false')) {
-      url += `&isAvailable=${availability}`
+      url += `&isAvailable=${availability}`;
     }
     return this.httpClient.get<Product[]>(url);
   }
