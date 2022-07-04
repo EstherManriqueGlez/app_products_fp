@@ -6,11 +6,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class QueryParamsService {
 
-  private searchNameParam = new BehaviorSubject('')
-  private searchMinPriceParam = new BehaviorSubject('')
-  private searchMaxPriceParam = new BehaviorSubject('')
-  private searchAvailabilityParam = new BehaviorSubject('')
-  
+  private searchNameParam = new BehaviorSubject('');
+  private searchMinPriceParam = new BehaviorSubject('');
+  private searchMaxPriceParam = new BehaviorSubject('');
+  private searchAvailabilityParam = new BehaviorSubject('');
+
   currentSearchNameParam = this.searchNameParam.asObservable();
   currentSearchMinPriceParam = this.searchMinPriceParam.asObservable();
   currentSearchMaxPriceParam = this.searchMaxPriceParam.asObservable();
@@ -18,16 +18,16 @@ export class QueryParamsService {
 
   constructor() { }
 
-  setSearchNameParam(name: string) {
+  setSearchNameParam(name: string): void {
     this.searchNameParam.next(name);
   }
-  setSearchMinPriceParam(minPrice: string) {
+  setSearchMinPriceParam(minPrice: string): void {
     this.searchMinPriceParam.next(minPrice);
   }
-  setSearchMaxPriceParam(maxPrice: string) {
+  setSearchMaxPriceParam(maxPrice: string): void {
     this.searchMaxPriceParam.next(maxPrice);
   }
-  setSearchAvailabilityParam(availability: string) {
+  setSearchAvailabilityParam(availability: string): void {
     this.searchAvailabilityParam.next(availability);
   }
 }

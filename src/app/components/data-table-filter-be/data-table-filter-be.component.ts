@@ -4,7 +4,6 @@ import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Product } from 'src/app/interfaces/products';
-import { MatRadioChange } from '@angular/material/radio';
 import { QueryParamsService } from 'src/app/services/query-params.service';
 
 @Component({
@@ -24,10 +23,10 @@ export class DataTableFilterBeComponent implements OnInit {
   pageSize: number | null = null;
   dataLoading: boolean = true;
 
-  searchName: string = ''
-  searchAvailability: string = ''
-  searchMinPrice: string = ''
-  searchMaxPrice: string =  ''
+  searchName: string = '';
+  searchAvailability: string = '';
+  searchMinPrice: string = '';
+  searchMaxPrice: string =  '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -63,10 +62,9 @@ export class DataTableFilterBeComponent implements OnInit {
       }
       this.refreshTableData();
     })
-
   }
 
-  pageChanged(event: PageEvent) {
+  pageChanged(event: PageEvent): void {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
@@ -77,7 +75,7 @@ export class DataTableFilterBeComponent implements OnInit {
     });
   }
 
-  refreshTableData() {
+  refreshTableData(): void {
     this.dataLoading = true;
     this._dataService.getProducts(
       this.searchName,
@@ -92,7 +90,7 @@ export class DataTableFilterBeComponent implements OnInit {
     });
   }
 
-  updateQueryParams(queryParams: Object) {
+  updateQueryParams(queryParams: Object): void {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: queryParams,

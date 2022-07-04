@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  clearFilter() {
+  clearFilter(): void {
     this._queryParams.setSearchAvailabilityParam('both');
     this._queryParams.setSearchNameParam('');
     this._queryParams.setSearchMinPriceParam('');
@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  search() {
+  search(): void {
     this.updateQueryParams({
       name: this.searchName || '',
       isAvailable: this.searchAvailability || 'both',
@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  updateQueryParams(queryParams: Object) {
+  updateQueryParams(queryParams: Object): void {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: queryParams,
