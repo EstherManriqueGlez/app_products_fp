@@ -6,11 +6,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class QueryParamsService {
 
+  // initialize global search variables
   private searchNameParam = new BehaviorSubject('');
   private searchMinPriceParam = new BehaviorSubject('');
   private searchMaxPriceParam = new BehaviorSubject('');
   private searchAvailabilityParam = new BehaviorSubject('');
 
+  // set variables observables
   currentSearchNameParam = this.searchNameParam.asObservable();
   currentSearchMinPriceParam = this.searchMinPriceParam.asObservable();
   currentSearchMaxPriceParam = this.searchMaxPriceParam.asObservable();
@@ -18,6 +20,7 @@ export class QueryParamsService {
 
   constructor() { }
 
+  // define variables setters
   setSearchNameParam(name: string): void {
     this.searchNameParam.next(name);
   }

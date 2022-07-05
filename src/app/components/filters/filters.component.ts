@@ -23,6 +23,7 @@ export class FiltersComponent implements OnInit {
   constructor(private _queryParams: QueryParamsService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+     // Get search variables (globals) from shared service
     this._queryParams.currentSearchNameParam.subscribe((name) => {
       this.searchName = name;
     })
@@ -36,30 +37,35 @@ export class FiltersComponent implements OnInit {
       this.searchAvailability = availability;
     })
 
+    // Run inputs change listener function
     this.fieldListener();
   }
 
+  // listen change in availability radio
   availabilityChange(event: MatRadioChange): void {
-    this._queryParams.setSearchAvailabilityParam(event.value || '');
+    this._queryParams.setSearchAvailabilityParam(event.value || ''); // update global sharedAvailability variable (service)
   }
 
   private fieldListener(): void {
+    // listen product name input change
     this.nameFilter.valueChanges
       .subscribe(
         productName => {
-          this._queryParams.setSearchNameParam(productName || '')
+          this._queryParams.setSearchNameParam(productName || '') // update global sharedProductName variable (service)
         }
       )
+    // listen product min price input change
     this.minPriceFilter.valueChanges
       .subscribe(
         minPrice => {
-          this._queryParams.setSearchMinPriceParam(minPrice || '');
+          this._queryParams.setSearchMinPriceParam(minPrice || ''); // update global sharedMinPrice variable (service)
         }
       )
+    // listen product max price input change
     this.maxPriceFilter.valueChanges
       .subscribe(
         maxPrice => {
-          this._queryParams.setSearchMaxPriceParam(maxPrice || '');
+          this._queryParams.setSearchMaxPriceParam(maxPrice || ''); // update global sharedMaxPrice variable (service)
         }
       )
   }
