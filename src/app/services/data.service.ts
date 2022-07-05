@@ -20,18 +20,18 @@ export class DataService {
   ): Observable<Product[]> {
     
     let url = `${this.base_url}?`;
-    if(name) {
-      url += `&productName_like=${name}`;
+    if(name) { // concat productName_like parameter if name has value
+      url += `&productName_like=^${name}`;
     }
-    if(minPrice) {
+    if(minPrice) { // concat price_gte (min price) parameter if minPrice has value
       url += `&price_gte=${minPrice}`;
     }
-    if(maxPrice) {
+    if(maxPrice) { // concat price_lte (max price) parameter if maxPrice has value
       url += `&price_lte=${maxPrice}`;
     }
-    if(availability && (availability === 'true' || availability === 'false')) {
+    if(availability && (availability === 'true' || availability === 'false')) { // concat isAvailable parameter if availability has value === true or === false
       url += `&isAvailable=${availability}`;
     }
-    return this.httpClient.get<Product[]>(url);
+    return this.httpClient.get<Product[]>(url); // Run request using httpClient
   }
 }

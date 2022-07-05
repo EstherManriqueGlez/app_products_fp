@@ -1,9 +1,17 @@
-.filters {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  
-  app-filters {
-    width: 90%;
+.filters-wrapper {
+  background-color: white;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  .filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    app-filters {
+      width: 90%;
+    }
   }
 }

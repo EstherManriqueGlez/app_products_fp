@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   constructor(private _queryParams: QueryParamsService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    // Get search variables (globals) from shared service
     this._queryParams.currentSearchNameParam.subscribe((name) => {
       this.searchName = name;
     })
@@ -31,13 +32,14 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-
+  // handle clear button callback
   clearFilter(): void {
+    // update search global variables (service) - Clean up values
     this._queryParams.setSearchAvailabilityParam('both');
     this._queryParams.setSearchNameParam('');
     this._queryParams.setSearchMinPriceParam('');
     this._queryParams.setSearchMaxPriceParam('');
-    this.updateQueryParams({
+    this.updateQueryParams({ // remove query params from url
       name: null,
       isAvailable: null,
       minPrice: null,
@@ -45,8 +47,9 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  // handle search button callback
   search(): void {
-    this.updateQueryParams({
+    this.updateQueryParams({ // update query params with the value of the search globals
       name: this.searchName || '',
       isAvailable: this.searchAvailability || 'both',
       minPrice: this.searchMinPrice || '',
@@ -54,6 +57,7 @@ export class HeaderComponent implements OnInit {
     })
   }
 
+  // helper funciton to update query params
   updateQueryParams(queryParams: Object): void {
     this.router.navigate([], {
       relativeTo: this.route,
