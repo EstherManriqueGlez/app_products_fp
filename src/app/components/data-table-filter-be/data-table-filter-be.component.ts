@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+
 import { Product } from 'src/app/interfaces/products';
+import { DataService } from 'src/app/services/data.service';
 import { QueryParamsService } from 'src/app/services/query-params.service';
 
 @Component({
@@ -58,7 +59,7 @@ export class DataTableFilterBeComponent implements OnInit {
       this._queryParams.setSearchMinPriceParam(params['minPrice'] || '');
       this._queryParams.setSearchMaxPriceParam(params['maxPrice'] || '');
 
-      // If page uqery param is set, update table pager initial page
+      // If page query param is set, update table pager initial page
       if (page > 0) {
         this.startingPage = page - 1; 
         this.pageSize = size;
