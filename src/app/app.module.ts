@@ -11,6 +11,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DataTableFilterBeComponent } from './components/data-table-filter-be/data-table-filter-be.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FiltersComponent } from './components/filters/filters.component';
+import { DataService } from './services/data.service';
+import { QueryParamsService } from './services/query-params.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,10 @@ import { FiltersComponent } from './components/filters/filters.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    DataService,
+    QueryParamsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
