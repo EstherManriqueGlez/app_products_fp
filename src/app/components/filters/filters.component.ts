@@ -20,53 +20,53 @@ export class FiltersComponent implements OnInit {
   minPriceFilter = new FormControl('');
   maxPriceFilter = new FormControl('');
 
-  constructor(private _queryParams: QueryParamsService, private route: ActivatedRoute) { }
+  constructor(private _queryParams: QueryParamsService, private route: ActivatedRoute) { };
 
   ngOnInit(): void {
-     // Get search variables (globals) from shared service
+     // Get search variables (filters) from shared service
     this._queryParams.currentSearchNameParam.subscribe((name) => {
       this.searchName = name;
-    })
+    });
     this._queryParams.currentSearchMinPriceParam.subscribe((minPrice) => {
       this.searchMinPrice = minPrice;
-    })
+    });
     this._queryParams.currentSearchMaxPriceParam.subscribe((maxPrice) => {
       this.searchMaxPrice = maxPrice;
-    })
+    });
     this._queryParams.currentSearchAvailabilityParam.subscribe((availability) => {
       this.searchAvailability = availability;
-    })
+    });
 
     // Run inputs change listener function
     this.fieldListener();
-  }
+  };
 
   // listen change in availability radio
   availabilityChange(event: MatRadioChange): void {
     this._queryParams.setSearchAvailabilityParam(event.value || ''); // update global sharedAvailability variable (service)
-  }
+  };
 
   private fieldListener(): void {
     // listen product name input change
     this.nameFilter.valueChanges
       .subscribe(
         productName => {
-          this._queryParams.setSearchNameParam(productName || '') // update global sharedProductName variable (service)
+          this._queryParams.setSearchNameParam(productName || ''); // update filter sharedProductName variable (service)
         }
-      )
+      );
     // listen product min price input change
     this.minPriceFilter.valueChanges
       .subscribe(
         minPrice => {
-          this._queryParams.setSearchMinPriceParam(minPrice || ''); // update global sharedMinPrice variable (service)
+          this._queryParams.setSearchMinPriceParam(minPrice || ''); // update filter sharedMinPrice variable (service)
         }
-      )
+      );
     // listen product max price input change
     this.maxPriceFilter.valueChanges
       .subscribe(
         maxPrice => {
-          this._queryParams.setSearchMaxPriceParam(maxPrice || ''); // update global sharedMaxPrice variable (service)
+          this._queryParams.setSearchMaxPriceParam(maxPrice || ''); // update filter sharedMaxPrice variable (service)
         }
-      )
-  }
-}
+      );
+  };
+};

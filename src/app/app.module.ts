@@ -20,7 +20,7 @@ import { QueryParamsService } from './services/query-params.service';
     NavbarComponent,
     DataTableFilterBeComponent,
     HeaderComponent,
-    FiltersComponent
+    FiltersComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,12 +29,12 @@ import { QueryParamsService } from './services/query-params.service';
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     DataService,
-    QueryParamsService
+    QueryParamsService,
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { };

@@ -33,17 +33,17 @@ const material = [
   MatFormFieldModule,
   MatCheckboxModule,
   MatExpansionModule,
-  MatRadioModule
-]
+  MatRadioModule,
+];
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    material
+    material,
   ],
   exports: [
-    material
-  ]
+    material,
+  ],
 })
-export class MaterialModule { }
+export class MaterialModule { };

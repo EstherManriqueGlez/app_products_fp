@@ -31,29 +31,29 @@ export class DataTableFilterBeComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _dataService: DataService, private _queryParams: QueryParamsService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private _dataService: DataService, private _queryParams: QueryParamsService, private router: Router, private route: ActivatedRoute) { };
 
   ngOnInit(): void {
-    // Get search variables (globals) from shared service
+    // Get search variables (filters) from shared service
     this._queryParams.currentSearchNameParam.subscribe((name) => {
       this.searchName = name;
-    })
+    });
     this._queryParams.currentSearchMinPriceParam.subscribe((minPrice) => {
       this.searchMinPrice = minPrice;
-    })
+    });
     this._queryParams.currentSearchMaxPriceParam.subscribe((maxPrice) => {
       this.searchMaxPrice = maxPrice;
-    })
+    });
     this._queryParams.currentSearchAvailabilityParam.subscribe((availability) => {
       this.searchAvailability = availability;
-    })
+    });
     
     // Listen to url query params change
     this.route.queryParams.subscribe((params) => {
       const page = params['page'];
       const size = params['size'];
 
-      // Update search variables (globals) in shared service with the query params values
+      // Update search variables (filters) in shared service with the query params values
       this._queryParams.setSearchAvailabilityParam(params['isAvailable'] || 'both');
       this._queryParams.setSearchNameParam(params['name'] || '');
       this._queryParams.setSearchMinPriceParam(params['minPrice'] || '');
@@ -63,12 +63,12 @@ export class DataTableFilterBeComponent implements OnInit {
       if (page > 0) {
         this.startingPage = page - 1; 
         this.pageSize = size;
-      }
+      };
       // Run API fetch
       // @see: function definition below
       this.refreshTableData();
-    })
-  }
+    });
+  };
 
   // listen to pager change to update query params (page and size)
   pageChanged(event: PageEvent): void {
@@ -76,11 +76,11 @@ export class DataTableFilterBeComponent implements OnInit {
       relativeTo: this.route,
       queryParams: {
         page: event.pageIndex + 1,
-        size: event.pageSize
+        size: event.pageSize,
       },
       queryParamsHandling: 'merge' // add params to the existing query params (if exists)
     });
-  }
+  };
 
   // Use data.service to get products from API
   refreshTableData(): void {
@@ -89,12 +89,12 @@ export class DataTableFilterBeComponent implements OnInit {
       this.searchName, // use shared search variables (dynamically updated from this component, or table or header components)
       this.searchAvailability,
       this.searchMinPrice,
-      this.searchMaxPrice
+      this.searchMaxPrice,
     ).subscribe((response: Product[]) => {
       this.dataSource.data = response; // update table data with fetch result
       this.dataSource.paginator = this.paginator; // update paginator
       this.dataSource.paginator.pageSize = this.pageSize; // update page size
       this.dataLoading = false; // hide spinner gif when fetch ends
     });
-  }
-}
+  };
+};
