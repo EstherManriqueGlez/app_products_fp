@@ -24,9 +24,10 @@
       </mat-form-field>
     </div>
   </div>
+  
   <div class="filter-by-availability">
-    <mat-radio-group aria-labelledby="example-radio-group-label" class="radio-buttons"
-      [(ngModel)]="searchAvailability" (change)="availabilityChange($event)">
+    <mat-radio-group aria-labelledby="example-radio-group-label" class="radio-buttons" [(ngModel)]="searchAvailability"
+      (change)="availabilityChange($event)">
       <mat-radio-button class="availables" [checked]="searchAvailability === 'true'" value="true">
         Availables
       </mat-radio-button>

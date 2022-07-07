@@ -9,32 +9,32 @@ import { QueryParamsService } from 'src/app/services/query-params.service';
 })
 export class HeaderComponent implements OnInit {
 
-  searchName: string = ''
-  searchAvailability: string = ''
-  searchMinPrice: string = ''
-  searchMaxPrice: string =  ''
+  searchName: string = '';
+  searchAvailability: string = '';
+  searchMinPrice: string = '';
+  searchMaxPrice: string =  '';
 
-  constructor(private _queryParams: QueryParamsService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private _queryParams: QueryParamsService, private router: Router, private route: ActivatedRoute) { };
 
   ngOnInit(): void {
-    // Get search variables (globals) from shared service
+    // Get search variables (filter) from shared service
     this._queryParams.currentSearchNameParam.subscribe((name) => {
       this.searchName = name;
-    })
+    });
     this._queryParams.currentSearchMinPriceParam.subscribe((minPrice) => {
       this.searchMinPrice = minPrice;
-    })
+    });
     this._queryParams.currentSearchMaxPriceParam.subscribe((maxPrice) => {
       this.searchMaxPrice = maxPrice;
-    })
+    });
     this._queryParams.currentSearchAvailabilityParam.subscribe((availability) => {
       this.searchAvailability = availability;
-    })
-  }
+    });
+  };
 
   // handle clear button callback
   clearFilter(): void {
-    // update search global variables (service) - Clean up values
+    // update search filter variables (service) - Clean up values
     this._queryParams.setSearchAvailabilityParam('both');
     this._queryParams.setSearchNameParam('');
     this._queryParams.setSearchMinPriceParam('');
@@ -43,27 +43,26 @@ export class HeaderComponent implements OnInit {
       name: null,
       isAvailable: null,
       minPrice: null,
-      maxPrice: null
+      maxPrice: null,
     });
-  }
+  };
 
   // handle search button callback
   search(): void {
-    this.updateQueryParams({ // update query params with the value of the search globals
+    this.updateQueryParams({ // update query params with the value of the search filters
       name: this.searchName || '',
       isAvailable: this.searchAvailability || 'both',
       minPrice: this.searchMinPrice || '',
-      maxPrice: this.searchMaxPrice || ''
-    })
-  }
+      maxPrice: this.searchMaxPrice || '',
+    });
+  };
 
   // helper funciton to update query params
   updateQueryParams(queryParams: Object): void {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: queryParams,
-      queryParamsHandling: 'merge'
+      queryParamsHandling: 'merge',
     });
-  }
-
-}
+  };
+};
